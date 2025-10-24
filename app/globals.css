@@ -27,7 +27,7 @@ body {
   min-height: 100vh;
   
   /* 设置背景图片 */
-  background-image: url('/images/bg.jpg');
+  background-image: url('/images/bg.jpg?v=2');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
