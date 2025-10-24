@@ -6,8 +6,8 @@ import { Footer } from "@/components/Footer";
 import { MusicPlayer } from "@/components/MusicPlayer";
 
 export const metadata: Metadata = {
-  title: "我的个人博客",
-  description: "分享技术、生活和思考",
+  title: "刘澈的博客",
+  description: "cms激推 ",
 };
 
 export default function RootLayout({
