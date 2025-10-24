@@ -17,10 +17,10 @@ const friends: Friend[] = [
     description: "前端大手子",
   },
   {
-    name: "示例友链2",
-    avatar: "https://via.placeholder.com/150",
+    name: "易安",
+    avatar: "/avatars/50056E6D432E05D30206F4AFCCF4DEA1.jpg",
     link: "https://example.com",
-    description: "这是另一个示例友链描述",
+    description: "",
   },
   // 你可以在这里添加更多友链
 ];
@@ -82,9 +82,7 @@ export default function FriendsPage() {
             欢迎大家速速添加我的友链，如果你想添加友链，请确保满足以下条件：
           </p>
           <ul className="text-gray-700 dark:text-gray-300">
-            <li>网站内容健康，积极向上</li>
             <li>网站能够正常访问</li>
-            <li>最好是技术类博客或个人站点</li>
           </ul>
           <p className="text-gray-700 dark:text-gray-300">
             符合条件的朋友可以通过邮件或其他方式联系我，附上你的网站信息：
