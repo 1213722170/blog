@@ -17,9 +17,9 @@ const friends: Friend[] = [
     description: "前端大手子",
   },
   {
-    name: "易安",
+    name: "猫猫大人是也",
     avatar: "/avatars/50056E6D432E05D30206F4AFCCF4DEA1.jpg",
-    link: "https://example.com",
+    link: "https://www.yuanshen.com/#/",
     description: "",
   },
   // 你可以在这里添加更多友链
