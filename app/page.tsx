@@ -10,7 +10,7 @@ export default function Home() {
       <section className="mb-12">
         <h1 className="text-4xl font-bold mb-4">欢迎来到我的博客</h1>
         <p className="text-lg text-gray-600 dark:text-gray-400">
-          分享技术、生活和思考的个人空间
+          分享生活、思考与体验的个人空间
         </p>
       </section>
 
