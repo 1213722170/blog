@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS 变量定义 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,48 +15,12 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
 }
 
-/* Code block styling */
-pre {
-  @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto my-4;
-}
-
-pre code {
-  @apply bg-transparent text-sm;
-}
-
-/* Inline code styling */
-:not(pre) > code {
-  @apply bg-gray-100 dark:bg-gray-800 text-rose-600 dark:text-rose-400 px-1.5 py-0.5 rounded text-sm font-semibold;
-}
-
-/* Dark mode for code blocks */
-.dark pre {
-  @apply bg-gray-800;
-}
-.dark :not(pre) > code {
-  @apply bg-gray-900 text-rose-400;
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* 全局 body 样式 */
 body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -83,11 +48,6 @@ body::before {
   background: rgba(255, 255, 255, 0.85);  /* 浅色模式：白色半透明 */
   z-index: -1;
   pointer-events: none;
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
 }
 
 /* 深色模式：黑色半透明遮罩 */
@@ -126,4 +86,8 @@ pre code {
 /* Dark mode for code blocks */
 .dark pre {
   @apply bg-gray-800;
+}
+
+.dark :not(pre) > code {
+  @apply bg-gray-900 text-rose-400;
 }
