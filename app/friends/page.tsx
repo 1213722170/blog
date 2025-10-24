@@ -12,13 +12,13 @@ interface Friend {
 const friends: Friend[] = [
   {
     name: "zestfulyk",
-    avatar: "/avatars/b_900bb864c57dde3936210cb63206c166.jpg",
+    avatar: "/blog/avatars/b_900bb864c57dde3936210cb63206c166.jpg",  // GitHub Pages 需要 basePath
     link: "https://zestfulyk.github.io/ZestfulYK-blog/",
     description: "前端大手子",
   },
   {
     name: "猫猫大人是也",
-    avatar: "/avatars/50056E6D432E05D30206F4AFCCF4DEA1.jpg",
+    avatar: "/blog/avatars/50056E6D432E05D30206F4AFCCF4DEA1.jpg",  // GitHub Pages 需要 basePath
     link: "https://www.yuanshen.com/#/",
     description: "",
   },
