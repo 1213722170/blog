@@ -17,6 +17,9 @@ export function Header() {
           <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400">
             关于
           </Link>
+          <Link href="/friends" className="hover:text-blue-600 dark:hover:text-blue-400">
+            友链
+          </Link>
           <ThemeToggle />
         </div>
       </nav>
