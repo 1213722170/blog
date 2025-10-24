@@ -11,10 +11,10 @@ interface Friend {
 // 友链数据配置
 const friends: Friend[] = [
   {
-    name: "示例友链1",
-    avatar: "https://via.placeholder.com/150",
-    link: "https://example.com",
-    description: "这是一个示例友链描述",
+    name: "zestfulyk",
+    avatar: "/avatars/b_900bb864c57dde3936210cb63206c166.jpg",
+    link: "https://zestfulyk.github.io/ZestfulYK-blog/",
+    description: "前端大手子",
   },
   {
     name: "示例友链2",
@@ -79,7 +79,7 @@ export default function FriendsPage() {
         </h2>
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-gray-700 dark:text-gray-300">
-            如果你想添加友链，请确保满足以下条件：
+            欢迎大家速速添加我的友链，如果你想添加友链，请确保满足以下条件：
           </p>
           <ul className="text-gray-700 dark:text-gray-300">
             <li>网站内容健康，积极向上</li>
