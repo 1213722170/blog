@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+
+// 判断是否为生产环境部署
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   reactStrictMode: true,
   
@@ -11,10 +15,11 @@ const nextConfig = {
   },
   
   // 如果你的仓库名是 blog（不是 username.github.io），需要设置 basePath
-  basePath: '/blog',
-  
-  // 资源路径前缀（与 basePath 保持一致）
-  assetPrefix: '/blog',
+  // 本地开发时自动禁用，生产环境自动启用
+  ...(isProd && {
+    basePath: '/blog',
+    assetPrefix: '/blog',
+  }),
 };
 
 module.exports = nextConfig;
