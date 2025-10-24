@@ -15,13 +15,13 @@ export function MusicPlayer() {
     {
       title: "三百六十五里路",
       artist: "李璐",
-      src: "/music/365-li-lu.m4a",
+      src: "/music/365-li-lu.mp3",  // 已更新为 mp3 格式
     },
     // 在这里添加更多歌曲
     // {
     //   title: "歌曲名称2",
     //   artist: "艺术家2",
-    //   src: "/music/song2.m4a",
+    //   src: "/music/song2.mp3",
     // },
   ];
 
