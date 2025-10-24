@@ -9,13 +9,15 @@
 
 ## 🌐 在线访问
 
-**项目已部署在 Vercel 上,访问地址:**
+**项目已部署到 GitHub Pages，国内可直接访问！**
 
-🔗 **[点击访问我的博客](https://blog-eta-teal-77.vercel.app)** _(请替换为你的实际 Vercel 域名)_
+🔗 **[点击访问我的博客](https://1213722170.github.io/blog)** 
 
-- GitHub 仓库: https://github.com/1213722170/blog
-- 部署平台: Vercel
-- 部署状态: ✅ 已上线
+- **GitHub Pages**: https://1213722170.github.io/blog ✅ 国内可访问
+- **Vercel 镜像**: https://blog-eta-teal-77.vercel.app ⚠️ 需要科学上网
+- **GitHub 仓库**: https://github.com/1213722170/blog
+- **部署平台**: GitHub Pages + Vercel 双平台部署
+- **部署状态**: ✅ 已上线
 
 ## ✨ 主要特性
 
@@ -26,6 +28,7 @@
 - 💻 **代码高亮** - 使用 Highlight.js 实现多语言代码高亮
 - 🎵 **音乐播放器** - 内置音乐播放器,可播放背景音乐
 - 🔗 **友情链接** - 精美的友链页面,展示好友网站
+- 🌎 **GitHub Pages 部署** - 国内可直接访问，无需科学上网
 - 📱 **响应式设计** - 完美适配各种设备屏幕
 - ⚡ **高性能** - 优化的构建和加载速度
 - 🔍 **SEO 友好** - 内置 Metadata API 支持
@@ -237,9 +240,9 @@ import "highlight.js/styles/github-dark.css"; // 更换为其他主题
 
 ## 🛠️ 部署
 
-### 已部署到 Vercel ✅
+### 已部署到 GitHub Pages ✅
 
-项目已成功部署,推送代码到 GitHub 即可自动更新:
+项目使用 GitHub Actions 自动部署到 GitHub Pages，推送代码到 GitHub 即可自动更新：
 
 ```bash
 git add .
@@ -247,11 +250,16 @@ git commit -m "更新内容"
 git push
 ```
 
-查看部署状态: https://vercel.com/dashboard
+查看部署状态: https://github.com/1213722170/blog/actions
 
-### 其他部署方案
+### 双平台部署方案
 
-详见 [`DEPLOYMENT.md`](./DEPLOYMENT.md) 了解更多部署选项
+- **GitHub Pages** (主要): 国内用户访问，无需科学上网
+- **Vercel** (备用): 国外用户访问，速度更快
+
+详细部署教程请查看：
+- [GitHub Pages 部署指南](./GITHUB-PAGES-DEPLOY.md)
+- [通用部署指南](./DEPLOYMENT.md)
 
 ## 🔧 常见问题
 
@@ -276,6 +284,7 @@ npm run build
 ## 📚 相关文档
 
 - 📖 [部署指南](./DEPLOYMENT.md) - 详细的多平台部署教程
+- 📖 [GitHub Pages 部署](./GITHUB-PAGES-DEPLOY.md) - GitHub Pages 详细指南
 - 📖 [GitHub 上传指南](./GITHUB-UPLOAD-GUIDE.md) - Git 使用完整教程
 - 📖 [音乐播放器说明](./MUSIC-PLAYER.md) - 音乐播放器功能介绍
 - 📖 [友链页面指南](./FRIENDS-GUIDE.md) - 友情链接使用教程
