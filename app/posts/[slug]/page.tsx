@@ -33,13 +33,12 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
   return (
     <article className="prose prose-lg dark:prose-invert max-w-none">
-      <header className="mb-8 not-prose pb-8 border-b-2 border-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
-        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent leading-tight">
+      <header className="mb-8 not-prose pb-8 border-b-2 border-gradient-to-r from-sky-500 to-cyan-500">
+        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-sky-600 to-cyan-600 dark:from-sky-400 dark:to-cyan-400 bg-clip-text text-transparent leading-tight">
           {post.title}
         </h1>
         <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">
           <time dateTime={post.date} className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full">
-            <span>📅</span>
             {formatDate(post.date)}
           </time>
           {post.tags && (
@@ -47,7 +46,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium border border-blue-300/50 dark:border-blue-600/50 hover:scale-110 transition-transform"
+                  className="bg-gradient-to-r from-sky-500/20 to-cyan-500/20 dark:from-sky-500/30 dark:to-cyan-500/30 text-sky-700 dark:text-sky-300 px-4 py-2 rounded-full text-sm font-medium border border-sky-300/50 dark:border-sky-600/50 hover:scale-110 transition-transform"
                 >
                   #{tag}
                 </span>
@@ -57,7 +56,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         </div>
       </header>
 
-      <div className="prose-headings:bg-gradient-to-r prose-headings:from-blue-600 prose-headings:to-purple-600 dark:prose-headings:from-blue-400 dark:prose-headings:to-purple-400 prose-headings:bg-clip-text prose-headings:text-transparent prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
+      <div className="prose-headings:bg-gradient-to-r prose-headings:from-sky-600 prose-headings:to-cyan-600 dark:prose-headings:from-sky-400 dark:prose-headings:to-cyan-400 prose-headings:bg-clip-text prose-headings:text-transparent prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}

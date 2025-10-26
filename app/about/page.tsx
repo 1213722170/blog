@@ -2,18 +2,17 @@ export default function AboutPage() {
   return (
     <div className="prose prose-lg dark:prose-invert max-w-none">
       <div className="mb-8">
-        <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+        <h1 className="bg-gradient-to-r from-sky-600 to-cyan-600 dark:from-sky-400 dark:to-cyan-400 bg-clip-text text-transparent">
           关于我
         </h1>
         
-        <p className="text-lg text-gray-600 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border-l-4 border-blue-500">
-          👋 欢迎来到我的个人博客!
+        <p className="text-lg text-gray-600 dark:text-gray-300 bg-sky-50 dark:bg-sky-900/20 p-4 rounded-xl border-l-4 border-sky-500">
+          欢迎来到我的个人博客!
         </p>
       </div>
 
-      <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-2xl mb-8">
-        <h2 className="text-blue-600 dark:text-blue-400 flex items-center gap-2">
-          <span>💻</span>
+      <div className="bg-gradient-to-br from-sky-50 to-cyan-50 dark:from-sky-900/20 dark:to-cyan-900/20 p-6 rounded-2xl mb-8 border border-sky-200/50 dark:border-sky-700/50">
+        <h2 className="text-sky-600 dark:text-sky-400">
           关于这个博客
         </h2>
         <p>
@@ -21,38 +20,36 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-6 rounded-2xl mb-8">
-        <h2 className="text-purple-600 dark:text-purple-400 flex items-center gap-2">
-          <span>⚙️</span>
+      <div className="bg-gradient-to-br from-cyan-50 to-sky-50 dark:from-cyan-900/20 dark:to-indigo-900/20 p-6 rounded-2xl mb-8 border border-cyan-200/50 dark:border-cyan-700/50">
+        <h2 className="text-cyan-600 dark:text-cyan-400">
           技术栈
         </h2>
         <ul className="space-y-2">
           <li className="flex items-start gap-2">
-            <span className="text-blue-500">◆</span>
-            <div><strong className="text-blue-600 dark:text-blue-400">框架</strong>: Next.js 14 (App Router)</div>
+            <span className="text-sky-500 mt-1">◆</span>
+            <div><strong className="text-sky-600 dark:text-sky-400">框架</strong>: Next.js 14 (App Router)</div>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-purple-500">◆</span>
-            <div><strong className="text-purple-600 dark:text-purple-400">语言</strong>: TypeScript</div>
+            <span className="text-cyan-500 mt-1">◆</span>
+            <div><strong className="text-cyan-600 dark:text-cyan-400">语言</strong>: TypeScript</div>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-pink-500">◆</span>
-            <div><strong className="text-pink-600 dark:text-pink-400">样式</strong>: Tailwind CSS</div>
+            <span className="text-sky-500 mt-1">◆</span>
+            <div><strong className="text-sky-600 dark:text-sky-400">样式</strong>: Tailwind CSS</div>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-green-500">◆</span>
-            <div><strong className="text-green-600 dark:text-green-400">内容</strong>: Markdown 文件</div>
+            <span className="text-indigo-500 mt-1">◆</span>
+            <div><strong className="text-indigo-600 dark:text-indigo-400">内容</strong>: Markdown 文件</div>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-orange-500">◆</span>
-            <div><strong className="text-orange-600 dark:text-orange-400">代码高亮</strong>: Highlight.js</div>
+            <span className="text-cyan-500 mt-1">◆</span>
+            <div><strong className="text-cyan-600 dark:text-cyan-400">代码高亮</strong>: Highlight.js</div>
           </li>
         </ul>
       </div>
 
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-2xl">
-        <h2 className="text-green-600 dark:text-green-400 flex items-center gap-2">
-          <span>📧</span>
+      <div className="bg-gradient-to-br from-indigo-50 to-sky-50 dark:from-indigo-900/20 dark:to-sky-900/20 p-6 rounded-2xl border border-indigo-200/50 dark:border-indigo-700/50">
+        <h2 className="text-indigo-600 dark:text-indigo-400">
           联系方式
         </h2>
         <p>
@@ -60,18 +57,16 @@ export default function AboutPage() {
         </p>
         <ul className="space-y-2">
           <li className="flex items-center gap-2 bg-white dark:bg-slate-800 p-3 rounded-lg">
-            <span>📧</span>
             <strong>Email</strong>: 1213722171@qq.com
           </li>
           <li className="flex items-center gap-2 bg-white dark:bg-slate-800 p-3 rounded-lg">
-            <span>💼</span>
             <strong>GitHub</strong>: github.com/1213722170
           </li>
         </ul>
       </div>
 
       <p className="mt-8 text-center text-gray-600 dark:text-gray-400 text-xl">
-        感谢你的访问! 🙏✨
+        感谢你的访问!
       </p>
     </div>
   );

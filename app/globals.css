@@ -2,15 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS 变量定义 */
+/* CSS 变量定义 - 蓝色系配色方案 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #3b82f6;
-  --primary-light: #60a5fa;
-  --primary-dark: #2563eb;
-  --accent: #8b5cf6;
-  --accent-light: #a78bfa;
+  --primary: #0ea5e9;        /* 天蓝色 */
+  --primary-light: #38bdf8;  /* 浅天蓝 */
+  --primary-dark: #0284c7;   /* 深天蓝 */
+  --secondary: #06b6d4;      /* 青色 */
+  --secondary-light: #22d3ee;
+  --accent: #6366f1;         /* 靛蓝色 */
+  --accent-light: #818cf8;
   --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(255, 255, 255, 0.3);
   --shadow-color: rgba(0, 0, 0, 0.1);
@@ -51,7 +53,7 @@ body {
   position: relative;
 }
 
-/* 添加渐变遮罩以提高可读性和美观性 */
+/* 添加渐变遮罩以提高可读性和美观性 - 蓝色系 */
 body::before {
   content: '';
   position: fixed;
@@ -61,21 +63,21 @@ body::before {
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(240, 249, 255, 0.85) 50%,
-    rgba(224, 242, 254, 0.9) 100%
+    rgba(240, 249, 255, 0.88) 0%,
+    rgba(224, 242, 254, 0.85) 50%,
+    rgba(207, 250, 254, 0.88) 100%
   );
   z-index: -1;
   pointer-events: none;
 }
 
-/* 深色模式：优雅的深色渐变遮罩 */
+/* 深色模式：蓝色调深色渐变遮罩 */
 .dark body::before {
   background: linear-gradient(
     135deg,
-    rgba(15, 23, 42, 0.85) 0%,
-    rgba(30, 41, 59, 0.8) 50%,
-    rgba(15, 23, 42, 0.85) 100%
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(12, 32, 50, 0.85) 50%,
+    rgba(15, 23, 42, 0.88) 100%
   );
 }
 
@@ -178,12 +180,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #0284c7, #0891b2);
 }
 
 .dark ::-webkit-scrollbar-track {
@@ -191,11 +193,11 @@ html {
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  background: linear-gradient(135deg, #38bdf8, #22d3ee);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
 }
 
 /* 链接悬停效果 */
