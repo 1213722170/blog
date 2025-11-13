@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { PetalAnimation } from "@/components/PetalAnimation";
+import { CloudAnimation } from "@/components/CloudAnimation";
 
 export const metadata: Metadata = {
   title: "刘澈的博客",
@@ -19,6 +21,8 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
+          <CloudAnimation />
+          <PetalAnimation />
           <Header />
           <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
             {children}
