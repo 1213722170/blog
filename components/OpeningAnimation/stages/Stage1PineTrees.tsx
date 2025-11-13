@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { pineTreeVariants, ANIMATION_CONFIG } from '../animations';
 import type { AnimationStageProps } from '../types';
 import Image from 'next/image';
+import { getAssetPath } from '../utils';
 
 export function Stage1PineTrees({ isActive, onComplete }: AnimationStageProps) {
   useEffect(() => {
@@ -24,7 +25,7 @@ export function Stage1PineTrees({ isActive, onComplete }: AnimationStageProps) {
       {/* 背景山峰 - 始终可见 */}
       <div className="absolute inset-0 flex items-end justify-center">
         <img
-          src="/assets/opening-animation/Mountains.svg"
+          src={getAssetPath('/assets/opening-animation/Mountains.svg')}
           alt="Mountains"
           className="w-full h-auto opacity-60"
           style={{ maxHeight: '40%' }}
@@ -43,7 +44,7 @@ export function Stage1PineTrees({ isActive, onComplete }: AnimationStageProps) {
         }}
       >
         <img
-          src="/assets/opening-animation/PineTree.svg"
+          src={getAssetPath('/assets/opening-animation/PineTree.svg')}
           alt="Left Pine Tree"
           className="w-96 h-128"
           style={{ width: '24rem', height: '32rem' }}
@@ -75,7 +76,7 @@ export function Stage1PineTrees({ isActive, onComplete }: AnimationStageProps) {
         }}
       >
         <img
-          src="/assets/opening-animation/PinkPavilion.svg"
+          src={getAssetPath('/assets/opening-animation/PinkPavilion.svg')}
           alt="Pink Pavilion"
           className="w-128 h-160"
           style={{ width: '32rem', height: '40rem' }}
@@ -94,7 +95,7 @@ export function Stage1PineTrees({ isActive, onComplete }: AnimationStageProps) {
         }}
       >
         <img
-          src="/assets/opening-animation/PineTree.svg"
+          src={getAssetPath('/assets/opening-animation/PineTree.svg')}
           alt="Right Pine Tree"
           className="w-96 h-128"
           style={{ width: '24rem', height: '32rem' }}

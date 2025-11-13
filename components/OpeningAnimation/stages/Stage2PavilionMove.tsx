@@ -9,6 +9,7 @@ import {
   ANIMATION_CONFIG,
 } from '../animations';
 import type { AnimationStageProps } from '../types';
+import { getAssetPath } from '../utils';
 
 export function Stage2PavilionMove({ isActive, onComplete }: AnimationStageProps) {
   useEffect(() => {
@@ -32,7 +33,7 @@ export function Stage2PavilionMove({ isActive, onComplete }: AnimationStageProps
       {/* 背景山峰 - 保持可见 */}
       <div className="absolute inset-0 flex items-end justify-center">
         <img
-          src="/assets/opening-animation/Mountains.svg"
+          src={getAssetPath('/assets/opening-animation/Mountains.svg')}
           alt="Mountains"
           className="w-full h-auto opacity-60"
           style={{ maxHeight: '40%' }}
@@ -42,7 +43,7 @@ export function Stage2PavilionMove({ isActive, onComplete }: AnimationStageProps
       {/* 粉色楼房 - 保持在底部位置（与第一阶段结束位置一致） */}
       <div className="absolute" style={{ left: '50%', bottom: '-1rem', transform: 'translateX(-50%)' }}>
         <img
-          src="/assets/opening-animation/PinkPavilion.svg"
+          src={getAssetPath('/assets/opening-animation/PinkPavilion.svg')}
           alt="Pink Pavilion"
           className="w-128 h-160"
           style={{ width: '32rem', height: '40rem' }}
@@ -61,7 +62,7 @@ export function Stage2PavilionMove({ isActive, onComplete }: AnimationStageProps
         }}
       >
         <img
-          src="/assets/opening-animation/Lotus.svg"
+          src={getAssetPath('/assets/opening-animation/Lotus.svg')}
           alt="Lotus"
           className="w-96 h-96"
           style={{ width: '18rem', height: '18rem' }}
@@ -81,7 +82,7 @@ export function Stage2PavilionMove({ isActive, onComplete }: AnimationStageProps
         }}
       >
         <img
-          src="/assets/opening-animation/TitleText.svg"
+          src={getAssetPath('/assets/opening-animation/TitleText.svg')}
           alt="界园"
           className="w-96 h-48"
           style={{
