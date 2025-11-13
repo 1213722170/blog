@@ -1,0 +1,7 @@
+# 动画阶段组件文件夹
+
+此文件夹用于存放各个动画阶段的组件：
+- Stage1PineTrees.tsx - 第一阶段：松树分离
+- Stage2PavilionMove.tsx - 第二阶段：楼房下移
+- Stage3LotusBloom.tsx - 第三阶段：莲花绽放
+- Stage4ScaleDown.tsx - 第四阶段：场景缩小

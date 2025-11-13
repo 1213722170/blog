@@ -1,0 +1,22 @@
+<svg width="300" height="150" viewBox="0 0 300 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 简化的"界园"文字 - 占位符 -->
+  <defs>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF69B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB6C1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- "界" 字简化 -->
+  <text x="50" y="100" font-size="80" font-weight="bold" fill="url(#textGradient)" filter="url(#glow)" font-family="serif">界</text>
+  
+  <!-- "园" 字简化 -->
+  <text x="180" y="100" font-size="80" font-weight="bold" fill="url(#textGradient)" filter="url(#glow)" font-family="serif">园</text>
+</svg>

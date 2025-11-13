@@ -1,0 +1,17 @@
+<svg width="1920" height="300" viewBox="0 0 1920 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 简化的山峰 - 占位符 -->
+  <defs>
+    <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#4682B4;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 左侧山峰 -->
+  <path d="M 0 300 L 200 100 L 400 180 L 600 300 Z" fill="url(#mountainGradient)" opacity="0.7"/>
+  <path d="M 100 300 L 350 80 L 550 200 L 700 300 Z" fill="url(#mountainGradient)" opacity="0.8"/>
+  
+  <!-- 右侧山峰 -->
+  <path d="M 1320 300 L 1470 200 L 1620 80 L 1820 300 Z" fill="url(#mountainGradient)" opacity="0.8"/>
+  <path d="M 1220 300 L 1420 180 L 1620 100 L 1920 300 Z" fill="url(#mountainGradient)" opacity="0.7"/>
+</svg>
