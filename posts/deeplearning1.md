@@ -37,6 +37,6 @@ tags: ["深度学习", "笔记"]
 4.根据结果优化模型
 
 如 通过分析得出的数据发现某天的数据和前七天的都有关联
-![描述](images/posts/ec5f6f4d-c737-49a8-a162-3a16abfc2f82.png)
+![描述](/images/posts/ec5f6f4d-c737-49a8-a162-3a16abfc2f82.png)
 在此基础上修改一下计算y值的算式 使得前七天的数据各占一定权重对它有影响
 ![描述](/images/posts/581187bb-f32f-4ebe-8e2d-d69112fd0683.png)
