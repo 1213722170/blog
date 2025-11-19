@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
-import { formatDate } from "@/lib/utils";
+import { formatDate, getAssetPath } from "@/lib/utils";
 import Image from "next/image";
 import "highlight.js/styles/github-dark.css";
 
@@ -62,13 +62,28 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
-            img: ({ node, ...props }) => (
-              <img
-                {...props}
-                className="rounded-xl shadow-lg w-full h-auto my-8"
-                loading="lazy"
-              />
-            ),
+            img: ({ node, ...props }) => {
+              const src = props.src || '';
+              // 如果是外部链接，直接使用
+              if (src.startsWith('http://') || src.startsWith('https://')) {
+                return (
+                  <img
+                    {...props}
+                    className="rounded-xl shadow-lg w-full h-auto my-8"
+                    loading="lazy"
+                  />
+                );
+              }
+              // 本地图片需要添加 basePath
+              return (
+                <img
+                  {...props}
+                  src={getAssetPath(src)}
+                  className="rounded-xl shadow-lg w-full h-auto my-8"
+                  loading="lazy"
+                />
+              );
+            },
           }}
         >
           {post.content}
