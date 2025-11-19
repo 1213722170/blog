@@ -37,4 +37,4 @@ piecewise linear curve
 ![详细解释](/images/posts/c6dd0c2f43df5bcb448dbce6edf4441a1a33af10.png)
 
 线性代数的表示方法
-![详细解释](images\posts\9756FF6E5965D72854FF9C25EA48A8A4.png)
+![线性代数表示](/images/posts/9756FF6E5965D72854FF9C25EA48A8A4.png)

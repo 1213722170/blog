@@ -62,33 +62,13 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
-            img: ({ node, ...props }) => {
-              const src = props.src || '';
-              const alt = props.alt || '';
-              
-              // 如果是外部链接，使用普通 img 标签
-              if (src.startsWith('http://') || src.startsWith('https://')) {
-                return (
-                  <img
-                    {...props}
-                    className="rounded-xl shadow-lg w-full h-auto my-8"
-                    loading="lazy"
-                  />
-                );
-              }
-              
-              // 如果是本地图片，使用 Next.js Image 组件优化
-              return (
-                <span className="block my-8">
-                  <img
-                    src={src}
-                    alt={alt}
-                    className="rounded-xl shadow-lg w-full h-auto"
-                    loading="lazy"
-                  />
-                </span>
-              );
-            },
+            img: ({ node, ...props }) => (
+              <img
+                {...props}
+                className="rounded-xl shadow-lg w-full h-auto my-8"
+                loading="lazy"
+              />
+            ),
           }}
         >
           {post.content}
