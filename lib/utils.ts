@@ -8,11 +8,13 @@ export function formatDate(dateString: string): string {
 }
 
 // 获取资源路径，自动处理 basePath
-// 在客户端使用，通过检测 URL 来判断是否需要 basePath
+// 在客户端使用，通过检测 hostname 来判断是否需要 basePath
 export function getAssetPath(path: string): string {
-  // 如果是浏览器环境，检查当前 URL
+  // 如果是浏览器环境
   if (typeof window !== 'undefined') {
-    const basePath = window.location.pathname.startsWith('/blog') ? '/blog' : '';
+    // 只有在 GitHub Pages 上才添加 /blog 前缀
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/blog' : '';
     return `${basePath}${path}`;
   }
   // 服务端渲染时使用环境变量
