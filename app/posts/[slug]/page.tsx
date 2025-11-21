@@ -63,8 +63,9 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
             img: ({ node, ...props }) => {
-              const src = props.src || '';
-              // 如果是外部链接，直接使用
+              let src = props.src || '';
+              
+              // 1. 如果是外部链接，直接使用
               if (src.startsWith('http://') || src.startsWith('https://')) {
                 return (
                   <img
@@ -74,11 +75,20 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                   />
                 );
               }
-              // 本地图片需要添加 basePath
+              
+              // 2. 如果是完整路径（以 / 开头），使用 getAssetPath 处理 basePath
+              if (src.startsWith('/')) {
+                src = getAssetPath(src);
+              } 
+              // 3. 如果只是文件名，自动添加 /images/posts/ 前缀
+              else {
+                src = getAssetPath(`/images/posts/${src}`);
+              }
+              
               return (
                 <img
                   {...props}
-                  src={getAssetPath(src)}
+                  src={src}
                   className="rounded-xl shadow-lg w-full h-auto my-8"
                   loading="lazy"
                 />

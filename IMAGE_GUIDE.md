@@ -1,4 +1,4 @@
-# 博客图片使用指南
+# 博客图片使用指南（已优化 ✨）
 
 ## 在博客中插入图片的方法
 
@@ -8,21 +8,42 @@
 ![图片描述](https://example.com/image.jpg)
 ```
 
-### 2. 使用本地图片（推荐用于永久图片）
+### 2. 使用本地图片 - 简化版（推荐 ⭐）
 
 #### 步骤：
-1. 在项目根目录创建 `public/images/posts/` 文件夹
-2. 将图片放入该文件夹
-3. 在 Markdown 中引用：
+1. 将图片放入 `public/images/posts/` 文件夹
+2. 在 Markdown 中**只写文件名**：
+
+```markdown
+![图片描述](your-image.jpg)
+```
+
+就这么简单！系统会自动添加完整路径。
+
+### 3. 使用本地图片 - 完整路径（旧方法，仍然有效）
 
 ```markdown
 ![图片描述](/images/posts/your-image.jpg)
 ```
 
-#### ⚠️ 重要提示：
-- ✅ **正确**：`/images/posts/your-image.jpg`（不包含 public）
-- ❌ **错误**：`/public/images/posts/your-image.jpg`
-- Next.js 会自动将 `public` 文件夹作为网站根目录，所以路径中不需要包含 `public/`
+## 支持的所有写法
+
+```markdown
+✅ 简化写法（推荐）
+![描述](image.png)
+
+✅ 完整路径（旧写法，继续有效）
+![描述](/images/posts/image.png)
+
+✅ 外部链接
+![描述](https://example.com/image.jpg)
+```
+
+## 重要提示
+
+- ✅ 路径不需要包含 `public/`
+- ✅ 新旧写法都支持，不会失效
+- ✅ 自动处理 GitHub Pages 的 basePath
 
 ### 3. 图片示例
 
