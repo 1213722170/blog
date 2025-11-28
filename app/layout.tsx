@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { MusicPlayer } from "@/components/MusicPlayer";
 import { PetalAnimation } from "@/components/PetalAnimation";
 import { CloudAnimation } from "@/components/CloudAnimation";
+import { AnimationStateManager } from "@/components/AnimationStateManager";
 
 // 动态导入开场动画组件（客户端渲染）
 const OpeningAnimation = dynamic(
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
+          <AnimationStateManager />
           <OpeningAnimation>
             <CloudAnimation />
             <PetalAnimation />

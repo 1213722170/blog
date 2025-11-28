@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationController } from './AnimationController';
 import { SkipButton } from './SkipButton';
@@ -14,6 +15,7 @@ import type { OpeningAnimationProps } from './types';
 export function OpeningAnimation({ onComplete, children }: OpeningAnimationProps) {
   const [showAnimation, setShowAnimation] = useState(true);
   const [isReady, setIsReady] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     // 检查用户是否偏好减少动画
@@ -23,8 +25,21 @@ export function OpeningAnimation({ onComplete, children }: OpeningAnimationProps
       return;
     }
 
+    // 检查是否是首次访问或从其他页面回到首页
+    const hasPlayedAnimation = sessionStorage.getItem('animationPlayed');
+    const isHomePage = pathname === '/';
+
+    if (hasPlayedAnimation && isHomePage) {
+      // 已经播放过动画且在首页，不再播放
+      setShowAnimation(false);
+      onComplete?.();
+      return;
+    }
+
+    // 标记动画已播放
+    sessionStorage.setItem('animationPlayed', 'true');
     setIsReady(true);
-  }, [onComplete]);
+  }, [onComplete, pathname]);
 
   const handleComplete = () => {
     setShowAnimation(false);
