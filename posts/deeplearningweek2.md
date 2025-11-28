@@ -1,6 +1,6 @@
 ---
 title: "刘澈的deeplearning笔记week2"
-date: "2025-11-17"
+date: "2025-11-28"
 description: "深度学习基础知识笔记"
 tags: ["深度学习", "笔记"]
 ---
