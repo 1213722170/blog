@@ -1,43 +1,26 @@
 ---
 title: "刘澈的deeplearning笔记1"
-date: "2025-11-17"
+date: "2025-12-4"
 description: "深度学习基础知识笔记"
 tags: ["深度学习", "笔记"]
 ---
 
 # 深度学习入门
-一.深度学习概念
+有的时候虽然一直在update 但是loss却没有下降 这时可能是遇到了localminima 但更可能是遇到了saddle point（鞍点）
+![描述](51e79bd5ce9e920e27908b0584d4a17982c0ca65.png)
+不同的是 在saddle point上仍然有使loss更低的路径 如何分辨？
 
-![深度学习概念](/images/posts/f38ec4c7-97c9-4465-9e20-b88343eb1fa6.png)
-让机器具备找函数的能力
-如语音识别 f（一段语音）=文字
+下面是一大段微积分和线性代数 看不懂
 
-二.深度学习步骤
+![描述](145d7bbd363a33c2dd421a931f14bb7105.png)
 
-![深度学习步骤](/images/posts/e3656947-f2a8-41e0-be73-df4b22812b28.png)
+1.使用泰勒展开 在梯度为0的点附近一阶导为0，可以用二阶导是否等于零判断是localminima还是saddle point
 
-1.找一个函数定义未知量 如y=wx+b
+2.看不懂
+![描述](333.png)
 
-![描述](/images/posts/5c2f866e-ea59-485c-b163-a3873440762b.png)
+如果H的所有特征向量都是正的/负的，可以判断是局部最小/最大值
 
+大概全都看不懂
 
-2.定义loss
-
-![define loss](/images/posts/dfgiugaafd-f32f-4ebe-8e2d-d69112fd0683.png)
-
-
-3.找到一个w与b使得loss最小
-
-方法：gradient descent
-
-![gradient descent](/images/posts/b32d6d1c-343d-4040-a4eb-e27024bd9f17.png)
-
-随机选取函数上一点 求该点斜率 斜率>0则向左移动 斜率<0则向右移动
-
-4.根据结果优化模型
-
-如 通过分析得出的数据发现某天的数据和前七天的都有关联
-![描述](/images/posts/ec5f6f4d-c737-49a8-a162-3a16abfc2f82.png)
-在此基础上修改一下计算y值的算式 使得前七天的数据各占一定权重对它有影响
-![描述](/images/posts/581187bb-f32f-4ebe-8e2d-d69112fd0683.png)
-得到优化后算式 发现优化过的算式loss小了很多
+在传统的低维问题中 localminima确实是很大的问题 但是在实际深度学习中可能存在一万个参数 就相当于一个一万维度的空间 如果要存在一个localminima 就要求所有的参数维度都是向上弯曲的 这样子的概率几乎为零。
