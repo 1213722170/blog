@@ -1,14 +1,12 @@
 ---
-title: "刘澈的deeplearning笔记1"
+title: "刘澈的deeplearning笔记4"
 date: "2025-12-4"
 description: "深度学习基础知识笔记"
 tags: ["深度学习", "笔记"]
 ---
-
-# 深度学习入门
-有的时候虽然一直在update 但是loss却没有下降 这时可能是遇到了localminima 但更可能是遇到了saddle point（鞍点）
+有的时候虽然一直在update参数 但是loss却没有下降 这时可能是遇到了localminima 但更可能是遇到了saddle point（鞍点）
 ![描述](51e79bd5ce9e920e27908b0584d4a17982c0ca65.png)
-不同的是 在saddle point上仍然有使loss更低的路径 如何分辨？
+两者的不同点在于saddle point上仍然有使loss更低的路径 但我们该如何分辨呢？
 
 下面是一大段微积分和线性代数 看不懂
 
