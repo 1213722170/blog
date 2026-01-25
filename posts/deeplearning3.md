@@ -7,6 +7,7 @@ tags: ["深度学习", "笔记"]
 
 # 深度学习入门
 ![描述](22666424BE593B2505AD32AF817F34EB.png)
+关于如何让模型更复杂:
 什么是overfitting？
 
 training model可以看作对真实数据分布的采样点 而最终生成的函数如果过于flexible 会导致函数把一些无关的因素也当成数据的规律 导致training data的loss很小 但实际上可能只有几个训练点满足这个函数 使得testing data的loss特别大。
