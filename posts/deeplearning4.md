@@ -1,6 +1,6 @@
 ---
 title: "刘澈的deeplearning笔记4"
-date: "2025-12-4"
+date: "2026-1-23"
 description: "深度学习基础知识笔记"
 tags: ["深度学习", "笔记"]
 ---

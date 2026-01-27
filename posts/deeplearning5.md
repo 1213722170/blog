@@ -1,6 +1,6 @@
 ---
 title: "刘澈的deeplearning笔记5"
-date: "2025-1-26"
+date: "2026-1-26"
 description: "batch和momentem"
 tags: ["深度学习", "笔记"]
 ---
