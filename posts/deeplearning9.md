@@ -4,11 +4,11 @@ date: "2026-2-8"
 description: "如何分辨一个training set是好还是坏"
 tags: ["深度学习", "笔记"]
 ---
-![alt text](<theory (v7)_23.png>)
+![alt text](theory%20(v7)_23.png)
 如图，定义若存在一个h使得其在训练数据与全部数据上的错误率相差大于ε，则这个训练数据是坏的。我们可以通过列举不同的h并计算错误率来判断这个数据集是好还是坏。
-![alt text](<theory (v7)_25.png>)
+![alt text](theory%20(v7)_25.png)
 概率分布满足图中式子，其中U是交集的意思
-![alt text](<theory (v7)_27.png>)
+![alt text](theory%20(v7)_27.png)
 根据某一个神奇的概率学算式，我们最终可以得出Dtrain是坏的的概率与h无关。最下面一行的H表示h的可能值的数量。
 
 分析可以得出，如果我们把N调的很大，H调到很小，那Dtrain是坏的的概率就会更小
@@ -16,7 +16,7 @@ tags: ["深度学习", "笔记"]
 即为training set中的数据越多Dtrain是坏的概率越小
 
 然而，回顾H的定义，虽然在这一个问题中H是离散的1，2，3这样的数字，但在处理实际问题时，数据往往不是离散的，就相当于H=无穷大，此时这个式子不就失去意义了吗？
-![](<theory (v7)_32.png>)
+![](theory%20(v7)_32.png)
 如图是两种解释 其中vc dimension是一种给看上去连续的数据计算H的方法
-![alt text](<theory (v7)_34.png>)
+![alt text](theory%20(v7)_34.png)
 如图，为了使Dtrain是坏的的概率减小，需要将N调的很大，H调到很小。但是如果H很小，又会使得数据的错误率很高。而machine learning就是使鱼和熊掌兼得的方法。
