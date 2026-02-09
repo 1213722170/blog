@@ -2,11 +2,14 @@ import { getPostBySlug, getAllPosts } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
 import { formatDate, getAssetPath } from "@/lib/utils";
 import Image from "next/image";
 import "highlight.js/styles/github-dark.css";
+import "katex/dist/katex.min.css";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -59,8 +62,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
       <div className="prose-headings:bg-gradient-to-r prose-headings:from-sky-600 prose-headings:to-cyan-600 dark:prose-headings:from-sky-400 dark:prose-headings:to-cyan-400 prose-headings:bg-clip-text prose-headings:text-transparent prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
         <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeHighlight, rehypeRaw]}
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
           components={{
             img: ({ node, ...props }) => {
               let src = props.src || '';

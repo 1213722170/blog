@@ -8,6 +8,7 @@ tags: ["深度学习", "笔记"]
 # 深度学习入门
 这周主要学习了怎么跑代码
 
+
 第一步：打开运行环境
 
 打开Google Colab (https://colab.research.google.com/)。
@@ -29,4 +30,3 @@ tags: ["深度学习", "笔记"]
 运行 Testing 部分的代码，它会生成一个 pred.csv 文件。
 
 最后把pred文件塞到kaggle上面 发现我的模型在2000个人中排名1950 令人忍俊不禁
-
