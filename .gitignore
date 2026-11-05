@@ -6,8 +6,13 @@
 # testing
 /coverage
 
+# Local recovery copies of removed gallery pictures
+/.gallery-trash/
+/.posts-trash/
+
 # next.js
 /.next/
+/.next-dev/
 /out/
 
 # production

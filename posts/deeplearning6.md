@@ -1,8 +1,10 @@
 ---
 title: "刘澈的deeplearning笔记6"
-date: "2026-1-30"
+date: "2026-01-30"
 description: "adaptive learning rate"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 7
 ---
 ![描述](optimizer-v4_04.png)
 在如上图所示的error surface上做gradient descent会发现，当我们把learning rate设太大时，参数会不断震荡，但loss也没有变小多少。而learning rate设太小时，虽然参数不再震荡，但是由于loss的图像已经很光滑，也无法到达loss最小的点。 

@@ -1,8 +1,10 @@
 ---
 title: "刘澈的deeplearning笔记7"
-date: "2026-2-1"
+date: "2026-02-01"
 description: "classification"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 8
 ---
 ![描述](classification_v2_03.png)
 在做分类问题时，如果给每个分类的组别标一个编号，很多情况下都不太合理，比如组别1往往不一定和组别2更有关系，和组别3又有很大差距

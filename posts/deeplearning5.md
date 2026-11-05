@@ -1,8 +1,10 @@
 ---
 title: "刘澈的deeplearning笔记5"
-date: "2026-1-26"
+date: "2026-01-26"
 description: "batch和momentem"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 6
 ---
 shuffle：在每次把数据分成不同batch时打乱资料
 如图，表面上看，大batch由于把超级多数据放在一起，会导致运行速度很慢，但由于它一次遍历了所有数据，准确度会更高

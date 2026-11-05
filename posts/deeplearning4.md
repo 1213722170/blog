@@ -1,8 +1,10 @@
 ---
 title: "刘澈的deeplearning笔记4"
-date: "2026-1-23"
+date: "2026-01-23"
 description: "深度学习基础知识笔记"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 5
 ---
 有的时候虽然一直在update参数 但是loss却没有下降 这时可能是遇到了localminima 但更可能是遇到了saddle point（鞍点）
 ![描述](51e79bd5ce9e920e27908b0584d4a17982c0ca65.png)

@@ -3,6 +3,8 @@ title: "刘澈的deeplearning笔记2"
 date: "2025-11-19"
 description: "深度学习基础知识笔记"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 2
 ---
 
 # 深度学习入门

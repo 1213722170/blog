@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "write-server": "node scripts/write-server.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test scripts/content.test.cjs scripts/gallery.test.cjs scripts/write-server.test.cjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",

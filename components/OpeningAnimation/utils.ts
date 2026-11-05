@@ -85,10 +85,4 @@ export const shouldUseSimplifiedAnimation = async (): Promise<boolean> => {
 /**
  * 获取资源路径（考虑 basePath）
  */
-export const getAssetPath = (path: string): string => {
-  // 在开发环境中，basePath 不会被应用
-  // 在生产环境中，Next.js 会自动处理 basePath
-  // 所以我们直接返回路径，让 Next.js 处理
-  const basePath = process.env.NODE_ENV === 'production' ? '/blog' : '';
-  return `${basePath}${path}`;
-};
+export { getAssetPath } from "@/lib/utils";

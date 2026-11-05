@@ -1,47 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import dynamic from "next/dynamic";
+import "highlight.js/styles/github-dark.css";
+import "katex/dist/katex.min.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MusicPlayer } from "@/components/MusicPlayer";
-import { PetalAnimation } from "@/components/PetalAnimation";
-import { CloudAnimation } from "@/components/CloudAnimation";
-import { AnimationStateManager } from "@/components/AnimationStateManager";
-
-// 动态导入开场动画组件（客户端渲染）
-const OpeningAnimation = dynamic(
-  () => import("@/components/OpeningAnimation").then((mod) => ({ default: mod.OpeningAnimation })),
-  { ssr: false }
-);
-
+import { site } from "@/lib/site";
 export const metadata: Metadata = {
-  title: "刘澈的博客",
-  description: "cms激推 ",
+  metadataBase: new URL(site.url.replace(/\/$/, "") + "/"),
+  title: { default: site.name, template: "%s · " + site.name },
+  description: site.description,
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="zh-CN" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col">
-        <ThemeProvider>
-          <AnimationStateManager />
-          <OpeningAnimation>
-            <CloudAnimation />
-            <PetalAnimation />
-            <Header />
-            <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
-              {children}
-            </main>
-            <Footer />
-            <MusicPlayer />
-          </OpeningAnimation>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="zh-CN" suppressHydrationWarning><body><ThemeProvider>
+    <a className="skip-link" href="#main-content">跳到正文</a>
+    <Header /><main id="main-content" className="site-main">{children}</main><Footer /><MusicPlayer />
+  </ThemeProvider></body></html>;
 }

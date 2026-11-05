@@ -1,6 +1,6 @@
 ---
 title: "刘澈的reinforce learning笔记1"
-date: "2026-3-9"
+date: "2026-03-09"
 description: "强化学习基础知识笔记"
 tags: ["强化学习", "笔记"]
 ---

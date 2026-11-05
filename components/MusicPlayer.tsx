@@ -1,325 +1,50 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
+import { getAssetPath } from "@/lib/utils";
 
-import { useState, useRef, useEffect } from "react";
-
-// 歌曲信息接口
-interface Song {
-  title: string;
-  artist: string;
-  src: string;
+const songs = [
+  { title: "三百六十五里路", artist: "李璐", src: "/music/365-li-lu.mp3" },
+  { title: "ave mujika", artist: "ave mujika", src: "/music/song2.m4a" },
+];
+function time(value: number) {
+  return Number.isFinite(value) ? Math.floor(value / 60) + ":" + String(Math.floor(value % 60)).padStart(2, "0") : "0:00";
 }
-
 export function MusicPlayer() {
-  // 播放列表配置 - 可以添加多首歌曲
-  const playlist: Song[] = [
-    {
-      title: "三百六十五里路",
-      artist: "李璐",
-      src: "/blog/music/365-li-lu.mp3",  // GitHub Pages 需要 basePath 前缀
-    },
-
-{
-  title: "ave mujika",
-   artist: "ave mujika",
-  src: "/blog/music/song2.m4a",
-    },
-  ];
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
+  const audio = useRef<HTMLAudioElement>(null);
+  const playRequested = useRef(false);
+  const [expanded, setExpanded] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
-  const [showPlayer, setShowPlayer] = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [playMode, setPlayMode] = useState<'loop' | 'single' | 'random'>('loop'); // 播放模式
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  // 当前播放的歌曲
-  const currentSong = playlist[currentSongIndex];
-
+  const [mode, setMode] = useState<"loop" | "single" | "random">("loop");
+  const [error, setError] = useState("");
+  const song = songs[index];
+  const play = () => audio.current?.play().catch(() => { playRequested.current = false; setPlaying(false); setError("暂时无法播放，请再试一次。"); });
+  useEffect(() => { if (audio.current) audio.current.volume = volume; }, [volume]);
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
-    const handleEnded = () => {
-      // 歌曲结束时的处理
-      if (playMode === 'single') {
-        // 单曲循环
-        audio.currentTime = 0;
-        audio.play();
-      } else if (playMode === 'random') {
-        // 随机播放
-        playRandomSong();
-      } else {
-        // 列表循环
-        playNext();
-      }
-    };
-
-    audio.addEventListener("timeupdate", updateTime);
-    audio.addEventListener("loadedmetadata", updateDuration);
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("timeupdate", updateTime);
-      audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [playMode, currentSongIndex]);
-
-  // 切换歌曲时自动播放
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      // 重置时间并播放
-      audio.currentTime = 0;
-      audio.play().catch(err => {
-        console.error('播放失败:', err);
-        setIsPlaying(false);
-      });
-    }
-  }, [currentSongIndex]);
-
-  const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio.play().catch(err => {
-        console.error('播放失败:', err);
-      });
-      setIsPlaying(true);
-    }
-  };
-
-  // 播放下一曲
-  const playNext = () => {
-    setCurrentSongIndex((prevIndex) => {
-      const nextIndex = (prevIndex + 1) % playlist.length;
-      return nextIndex;
-    });
-  };
-
-  // 播放上一曲
-  const playPrevious = () => {
-    setCurrentSongIndex((prevIndex) => {
-      const prevIndexCalc = prevIndex - 1;
-      return prevIndexCalc < 0 ? playlist.length - 1 : prevIndexCalc;
-    });
-  };
-
-  // 随机播放
-  const playRandomSong = () => {
-    if (playlist.length <= 1) return;
-    let randomIndex;
-    do {
-      randomIndex = Math.floor(Math.random() * playlist.length);
-    } while (randomIndex === currentSongIndex);
-    setCurrentSongIndex(randomIndex);
-  };
-
-  // 切换播放模式
-  const togglePlayMode = () => {
-    const modes: Array<'loop' | 'single' | 'random'> = ['loop', 'single', 'random'];
-    const currentIndex = modes.indexOf(playMode);
-    const nextIndex = (currentIndex + 1) % modes.length;
-    setPlayMode(modes[nextIndex]);
-  };
-
-  // 获取播放模式图标
-  const getPlayModeIcon = () => {
-    switch (playMode) {
-      case 'loop':
-        return '🔁'; // 列表循环
-      case 'single':
-        return '🔂'; // 单曲循环
-      case 'random':
-        return '🔀'; // 随机播放
-      default:
-        return '🔁';
-    }
-  };
-
-  // 获取播放模式文字
-  const getPlayModeText = () => {
-    switch (playMode) {
-      case 'loop':
-        return '列表循环';
-      case 'single':
-        return '单曲循环';
-      case 'random':
-        return '随机播放';
-      default:
-        return '列表循环';
-    }
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const newTime = parseFloat(e.target.value);
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const newVolume = parseFloat(e.target.value);
-    audio.volume = newVolume;
-    setVolume(newVolume);
-  };
-
-  const formatTime = (time: number) => {
-    if (isNaN(time)) return "0:00";
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
-
-  if (!showPlayer) {
-    return (
-      <button
-        onClick={() => setShowPlayer(true)}
-        className="fixed bottom-4 right-4 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-all z-50"
-        aria-label="显示音乐播放器"
-      >
-        🎵
-      </button>
-    );
+    setPosition(0); setDuration(0); setError("");
+    if (playRequested.current) void play();
+  }, [index]);
+  function toggle() {
+    setError("");
+    if (playing) { playRequested.current = false; audio.current?.pause(); }
+    else { playRequested.current = true; void play(); }
   }
-
-  return (
-    <div className="fixed bottom-4 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-4 w-80 z-50 border border-gray-200 dark:border-gray-700">
-      <audio ref={audioRef} src={currentSong.src} preload="metadata" />
-      
-      {/* 头部 */}
-      <div className="flex justify-between items-start mb-3">
-        <div className="flex-1">
-          <h3 className="font-semibold text-sm truncate">{currentSong.title}</h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-            {currentSong.artist}
-          </p>
-        </div>
-        <button
-          onClick={() => setShowPlayer(false)}
-          className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 ml-2"
-          aria-label="隐藏播放器"
-        >
-          ✕
-        </button>
-      </div>
-
-      {/* 进度条 */}
-      <div className="mb-3">
-        <input
-          type="range"
-          min="0"
-          max={duration || 0}
-          value={currentTime}
-          onChange={handleSeek}
-          className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-          <span>{formatTime(currentTime)}</span>
-          <span>{formatTime(duration)}</span>
-        </div>
-      </div>
-
-      {/* 控制按钮 */}
-      <div className="flex items-center justify-center gap-3 mb-3">
-        {/* 播放模式 */}
-        <button
-          onClick={togglePlayMode}
-          className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          aria-label={getPlayModeText()}
-          title={getPlayModeText()}
-        >
-          <span className="text-lg">{getPlayModeIcon()}</span>
-        </button>
-
-        {/* 上一曲 */}
-        <button
-          onClick={playPrevious}
-          disabled={playlist.length <= 1}
-          className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          aria-label="上一曲"
-        >
-          <span className="text-xl">⏮</span>
-        </button>
-
-        {/* 播放/暂停 */}
-        <button
-          onClick={togglePlay}
-          className="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors shadow-lg"
-          aria-label={isPlaying ? "暂停" : "播放"}
-        >
-          {isPlaying ? (
-            <span className="text-xl">⏸</span>
-          ) : (
-            <span className="text-xl ml-0.5">▶</span>
-          )}
-        </button>
-
-        {/* 下一曲 */}
-        <button
-          onClick={playNext}
-          disabled={playlist.length <= 1}
-          className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          aria-label="下一曲"
-        >
-          <span className="text-xl">⏭</span>
-        </button>
-
-        {/* 音量控制 */}
-        <div className="flex items-center gap-2 flex-1">
-          <span className="text-sm">🔊</span>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolumeChange}
-            className="flex-1 h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
-          />
-        </div>
-      </div>
-
-      {/* 播放列表信息 */}
-      {playlist.length > 1 && (
-        <div className="text-center text-xs text-gray-500 dark:text-gray-400 mb-2">
-          {currentSongIndex + 1} / {playlist.length}
-        </div>
-      )}
-
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: #2563eb;
-          cursor: pointer;
-        }
-        .slider::-moz-range-thumb {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: #2563eb;
-          cursor: pointer;
-          border: none;
-        }
-      `}</style>
-    </div>
-  );
+  function next() {
+    setIndex((current) => mode === "random" ? (current + 1 + Math.floor(Math.random() * (songs.length - 1))) % songs.length : (current + 1) % songs.length);
+  }
+  return <div className="music-widget">
+    <audio ref={audio} src={getAssetPath(song.src)} preload="none" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onTimeUpdate={() => setPosition(audio.current?.currentTime || 0)} onLoadedMetadata={() => setDuration(audio.current?.duration || 0)} onError={() => { setPlaying(false); setError("音频暂时不可用。"); }} onEnded={() => { if (mode === "single") { if (audio.current) audio.current.currentTime = 0; void play(); } else next(); }} />
+    {expanded && <section className="music-panel" aria-label="音乐播放器">
+      <div className="music-panel-heading"><div><h2>{song.title}</h2><p>{song.artist}</p></div><button onClick={() => setExpanded(false)} aria-label="收起音乐播放器">✕</button></div>
+      <label className="sr-only" htmlFor="music-seek">播放进度</label><input id="music-seek" type="range" min={0} max={duration || 0} step={0.1} value={position} onChange={(event) => { const value = Number(event.target.value); if (audio.current) audio.current.currentTime = value; setPosition(value); }} />
+      <div className="music-times"><span>{time(position)}</span><span>{time(duration)}</span></div>
+      <div className="music-controls"><button onClick={() => setIndex((current) => (current + songs.length - 1) % songs.length)} aria-label="上一曲">←</button><button className="music-play" onClick={toggle} aria-label={playing ? "暂停" : "播放"}>{playing ? "Ⅱ" : "▶"}</button><button onClick={next} aria-label="下一曲">→</button><label><span className="sr-only">播放模式</span><select value={mode} onChange={(event) => setMode(event.target.value as typeof mode)}><option value="loop">列表循环</option><option value="single">单曲循环</option><option value="random">随机播放</option></select></label></div>
+      <label className="music-volume">音量<input type="range" min={0} max={1} step={0.01} value={volume} onChange={(event) => setVolume(Number(event.target.value))} /></label>
+      {error && <p role="status" className="music-error">{error}</p>}
+    </section>}
+    <button className="music-toggle" onClick={() => setExpanded((value) => !value)} aria-expanded={expanded} aria-label={expanded ? "收起音乐播放器" : "打开音乐播放器"}><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M8 14V4l9-2v10M8 7l9-2" /><ellipse cx="5" cy="15" rx="3" ry="2" /><ellipse cx="14" cy="13" rx="3" ry="2" /></svg><span>{playing ? "正在播放" : "听一会儿"}</span></button>
+  </div>;
 }

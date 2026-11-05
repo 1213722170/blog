@@ -1,6 +1,6 @@
 ---
 title: "一些gpt-image2提示词"
-date: "2026-6-7"
+date: "2026-06-07"
 description: ""
 tags: []
 ---

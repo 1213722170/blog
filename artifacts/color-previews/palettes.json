@@ -1,0 +1,97 @@
+[
+  {
+    "id": "01-moss-green",
+    "name": "苔绿纸笺",
+    "description": "浅苔绿 × 松针绿 · 安静自然",
+    "mode": "light",
+    "colors": {
+      "background": "#f1f5ed",
+      "foreground": "#293b2d",
+      "muted": "#626f60",
+      "subtle": "#7b8877",
+      "line": "#d5dfcf",
+      "primary": "#3d704c",
+      "primary-light": "#6a9072",
+      "primary-dark": "#254f33",
+      "surface": "#e7eddf",
+      "paper": "#fbfcf7"
+    },
+    "tape": "#9caf7d"
+  },
+  {
+    "id": "02-mist-blue",
+    "name": "雾蓝手记",
+    "description": "雾蓝灰 × 靛蓝 · 清爽理性",
+    "mode": "light",
+    "colors": {
+      "background": "#edf3f8",
+      "foreground": "#293b4b",
+      "muted": "#5f7285",
+      "subtle": "#7a8da0",
+      "line": "#cfdce8",
+      "primary": "#386d98",
+      "primary-light": "#6a94b6",
+      "primary-dark": "#244e74",
+      "surface": "#e1ebf3",
+      "paper": "#f9fcff"
+    },
+    "tape": "#8eafca"
+  },
+  {
+    "id": "03-warm-apricot",
+    "name": "暖杏书页",
+    "description": "奶油杏 × 陶土棕 · 温暖复古",
+    "mode": "light",
+    "colors": {
+      "background": "#fbf2e6",
+      "foreground": "#49382f",
+      "muted": "#856d5a",
+      "subtle": "#a08a75",
+      "line": "#e8d7c3",
+      "primary": "#a15c37",
+      "primary-light": "#ba8058",
+      "primary-dark": "#794126",
+      "surface": "#f3e7d6",
+      "paper": "#fffbf4"
+    },
+    "tape": "#d5ad77"
+  },
+  {
+    "id": "04-lotus-purple",
+    "name": "藕紫随笔",
+    "description": "浅藕紫 × 烟紫 · 柔和文艺",
+    "mode": "light",
+    "colors": {
+      "background": "#f4eff7",
+      "foreground": "#403346",
+      "muted": "#7d6b84",
+      "subtle": "#97879d",
+      "line": "#ded2e4",
+      "primary": "#835d94",
+      "primary-light": "#a083ae",
+      "primary-dark": "#613e72",
+      "surface": "#ebe2ef",
+      "paper": "#fdfaff"
+    },
+    "tape": "#b498c3"
+  },
+  {
+    "id": "05-midnight-blue",
+    "name": "深夜墨蓝",
+    "description": "深墨蓝 × 月光蓝 · 沉静专注",
+    "mode": "dark",
+    "colors": {
+      "background": "#141e2c",
+      "foreground": "#e0e8f3",
+      "muted": "#a2b3ca",
+      "subtle": "#8196b0",
+      "line": "#304158",
+      "primary": "#a0c7ee",
+      "primary-light": "#b9d9f7",
+      "primary-dark": "#d0e6fc",
+      "surface": "#1b2a3d",
+      "paper": "#1a283b"
+    },
+    "tape": "#87a6cc"
+  }
+]

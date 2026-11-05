@@ -1,25 +1,13 @@
 /** @type {import('next').NextConfig} */
-
-// 判断是否为生产环境部署
-const isProd = process.env.NODE_ENV === 'production';
-
-const nextConfig = {
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').trim().replace(/^\/+|\/+$/g, '');
+module.exports = {
   reactStrictMode: true,
-  
-  // GitHub Pages 部署配置
-  output: 'export',  // 启用静态导出
-  
-  // 图片配置 - GitHub Pages 不支持 Next.js 图片优化
-  images: {
-    unoptimized: true,
-  },
-  
-  // 如果你的仓库名是 blog（不是 username.github.io），需要设置 basePath
-  // 本地开发时自动禁用，生产环境自动启用
-  ...(isProd && {
-    basePath: '/blog',
-    assetPrefix: '/blog',
-  }),
+  // Keep hot-reload chunks separate from static production builds.
+  distDir: process.env.NODE_ENV === 'development' ? '.next-dev' : '.next',
+  output: 'export',
+  trailingSlash: true,
+  images: { unoptimized: true },
+  basePath: basePath ? '/' + basePath : '',
+  // Identical build-time value on the server and in the browser.
+  env: { NEXT_PUBLIC_BASE_PATH: basePath ? '/' + basePath : '' },
 };
-
-module.exports = nextConfig;

@@ -1,8 +1,10 @@
 ---
 title: "刘澈的deeplearning笔记9"
-date: "2026-2-8"
+date: "2026-02-08"
 description: "如何分辨一个training set是好还是坏"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 10
 ---
 ![alt text](theory%20(v7)_23.png)
 如图，定义若存在一个h使得其在训练数据与全部数据上的错误率相差大于ε，则这个训练数据是坏的。我们可以通过列举不同的h并计算错误率来判断这个数据集是好还是坏。

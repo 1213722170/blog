@@ -1,107 +1,45 @@
-import { getPostBySlug, getAllPosts } from "@/lib/posts";
+import Link from "next/link";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import { ArticleTools } from "@/components/ArticleTools";
+import { getAllPosts, getDeepLearningPosts, getPostBySlug } from "@/lib/posts";
+import { deepLearning } from "@/lib/site";
+import { formatDate } from "@/lib/utils";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import rehypeHighlight from "rehype-highlight";
-import rehypeRaw from "rehype-raw";
-import rehypeKatex from "rehype-katex";
-import { formatDate, getAssetPath } from "@/lib/utils";
-import Image from "next/image";
-import "highlight.js/styles/github-dark.css";
-import "katex/dist/katex.min.css";
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+// Static export already limits routes to generateStaticParams; dynamicParams=false
+// triggers a misleading missing-function error in Next 14's development server.
+export function generateStaticParams() { return getAllPosts().map((post) => ({ slug: post.slug })); }
+export function generateMetadata({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
-  if (!post) return {};
-
-  return {
-    title: `${post.title} | 我的博客`,
-    description: post.description,
-  };
+  return post ? { title: post.title, description: post.description || post.title } : {};
 }
-
 export default function PostPage({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  return (
-    <article className="prose prose-lg dark:prose-invert max-w-none">
-      <header className="mb-8 not-prose pb-8 border-b-2 border-gradient-to-r from-sky-500 to-cyan-500">
-        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-sky-600 to-cyan-600 dark:from-sky-400 dark:to-cyan-400 bg-clip-text text-transparent leading-tight">
-          {post.title}
-        </h1>
-        <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">
-          <time dateTime={post.date} className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full">
-            {formatDate(post.date)}
-          </time>
-          {post.tags && (
-            <div className="flex gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-gradient-to-r from-sky-500/20 to-cyan-500/20 dark:from-sky-500/30 dark:to-cyan-500/30 text-sky-700 dark:text-sky-300 px-4 py-2 rounded-full text-sm font-medium border border-sky-300/50 dark:border-sky-600/50 hover:scale-110 transition-transform"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      </header>
-
-      <div className="prose-headings:bg-gradient-to-r prose-headings:from-sky-600 prose-headings:to-cyan-600 dark:prose-headings:from-sky-400 dark:prose-headings:to-cyan-400 prose-headings:bg-clip-text prose-headings:text-transparent prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
-          components={{
-            img: ({ node, ...props }) => {
-              let src = props.src || '';
-              
-              // 1. 如果是外部链接，直接使用
-              if (src.startsWith('http://') || src.startsWith('https://')) {
-                return (
-                  <img
-                    {...props}
-                    className="rounded-xl shadow-lg w-full h-auto my-8"
-                    loading="lazy"
-                  />
-                );
-              }
-              
-              // 2. 如果是完整路径（以 / 开头），使用 getAssetPath 处理 basePath
-              if (src.startsWith('/')) {
-                src = getAssetPath(src);
-              } 
-              // 3. 如果只是文件名，自动添加 /images/posts/ 前缀
-              else {
-                src = getAssetPath(`/images/posts/${src}`);
-              }
-              
-              return (
-                <img
-                  {...props}
-                  src={src}
-                  className="rounded-xl shadow-lg w-full h-auto my-8"
-                  loading="lazy"
-                />
-              );
-            },
-          }}
-        >
-          {post.content}
-        </ReactMarkdown>
+  if (!post) notFound();
+  const isSeries = post.series === deepLearning.id;
+  const series = isSeries ? getDeepLearningPosts() : [];
+  const index = series.findIndex((entry) => entry.slug === post.slug);
+  const previous = series[index - 1];
+  const next = series[index + 1];
+  return <div className="article-page">
+    <Link href={isSeries ? deepLearning.href : "/archives"} className="back-link">← {isSeries ? "深度学习专题" : "全部文章"}</Link>
+    <header className="article-header">
+      <p className="eyebrow">{isSeries ? "DEEP LEARNING / " + String(index + 1).padStart(2, "0") : "NOTES & THOUGHTS"}</p>
+      <h1 id="article-title">{post.title}</h1>
+      {post.description && <p className="article-description">{post.description}</p>}
+      <div className="article-meta"><time dateTime={post.date}>{formatDate(post.date)}</time><span className="meta-dot">·</span><span>约 {post.readingMinutes} 分钟</span>{post.tags.map((tag) => <span className="article-tag" key={tag}>{tag}</span>)}</div>
+    </header>
+    <div className="article-layout">
+      <div className="article-content">
+        {isSeries && <div className="series-banner"><Link href={deepLearning.href}>深度学习笔记 <span aria-hidden="true">↗</span></Link><span>第 {index + 1} / {series.length} 篇</span></div>}
+        <div id="article-body"><MarkdownRenderer content={post.content} /></div>
+        <div className="article-end"><span aria-hidden="true">✳</span><p>写到这里，留待下次继续。</p></div>
+        {isSeries ? <nav className="series-pagination" aria-label="专题文章导航">
+          {previous ? <Link href={"/posts/" + previous.slug}><span>← 上一篇</span><strong>{previous.title}</strong></Link> : <Link href={deepLearning.href}><span>← 专题目录</span><strong>从这里开始学习</strong></Link>}
+          {next ? <Link href={"/posts/" + next.slug}><span>下一篇 →</span><strong>{next.title}</strong></Link> : <Link href={deepLearning.href}><span>已读到最新一篇 ✓</span><strong>回到专题目录</strong></Link>}
+        </nav> : <Link href="/archives" className="text-link">继续翻阅其他文章 →</Link>}
       </div>
-    </article>
-  );
+      <ArticleTools slug={post.slug} />
+    </div>
+  </div>;
 }

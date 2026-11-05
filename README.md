@@ -1,322 +1,116 @@
-# 我的个人博客 ✨
+# 刘澈的博客
 
-一个使用 Next.js 14、TypeScript 和 Tailwind CSS 构建的现代化个人博客系统。支持 Markdown 文章、深色模式、代码高亮、音乐播放器等功能。
+基于 Next.js 14、React、TypeScript 和 Tailwind CSS 的静态个人博客。以 Markdown 保存文章，采用纸面、墨色和青绿色的阅读界面。
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38bdf8)
-![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black)
+## 本地运行
 
-## 🌐 在线访问
+使用 Node.js 22：
 
-**项目已部署到 GitHub Pages，国内可直接访问！**
+~~~powershell
+npm.cmd ci
+npm.cmd run dev
+~~~
 
-🔗 **[点击访问我的博客](https://1213722170.github.io/blog)** 
+打开 http://localhost:3000。项目保留现有的本地写作页 /write；需要保存和上传图片时，另开终端运行：
 
-- **GitHub Pages**: https://1213722170.github.io/blog ✅ 国内可访问
-- **Vercel 镜像**: https://blog-eta-teal-77.vercel.app ⚠️ 需要科学上网
-- **GitHub 仓库**: https://github.com/1213722170/blog
-- **部署平台**: GitHub Pages + Vercel 双平台部署
-- **部署状态**: ✅ 已上线
+~~~powershell
+npm.cmd run write-server
+~~~
 
-## ✨ 主要特性
+写作服务默认使用端口 4317。已存在文章的专题等额外 front matter 在保存时会保留。
 
-- 🚀 **Next.js 14** - 使用最新的 App Router 和 React Server Components
-- 📝 **Markdown 支持** - 使用 Markdown 格式编写博客文章
-- 🎨 **Tailwind CSS** - 现代化的响应式设计
-- 🌓 **深色模式** - 支持明暗主题切换,自动保存用户偏好
-- 💻 **代码高亮** - 使用 Highlight.js 实现多语言代码高亮
-- 🎵 **音乐播放器** - 内置音乐播放器,可播放背景音乐
-- 🔗 **友情链接** - 精美的友链页面,展示好友网站
-- 🌎 **GitHub Pages 部署** - 国内可直接访问，无需科学上网
-- 📱 **响应式设计** - 完美适配各种设备屏幕
-- ⚡ **高性能** - 优化的构建和加载速度
-- 🔍 **SEO 友好** - 内置 Metadata API 支持
+在写作页打开已有文章后，可点击「删除文章」。确认后文章会从本地列表移除，编辑器切换到新文章；原文备份保存在 `.posts-trash/`，配图保留。需要恢复时，将备份移回 `posts/` 并恢复原文件名。删除后重新部署，线上网站才会同步更新。
 
-## 📋 技术栈
+## 页面
 
-- **框架**: Next.js 14
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
-- **Markdown 处理**: 
-  - gray-matter (Front Matter 解析)
-  - react-markdown (Markdown 渲染)
-  - remark-gfm (GitHub Flavored Markdown)
-  - rehype-highlight (代码高亮)
-  - highlight.js (语法高亮主题)
+- /：个人介绍、图片集入口、最近 6 篇文章。
+- /gallery/：喜欢的图片，支持瀑布流展示、放大预览和本地多图上传。
+- /topics/deep-learning/：保留旧专题地址与文章之间的阅读导航，不再作为导航栏目。
+- /archives/：按年份分组，可按标签和标题、简介搜索。
+- /posts/<slug>/：文章、章节目录、阅读进度、图片预览和专题上一篇 / 下一篇。
+- /about/、/friends/、/write/：保留原有页面。
 
-## 🚀 本地开发
+## 添加图片
 
-### 环境要求
+本地启动 `npm.cmd run dev` 和 `npm.cmd run write-server`，进入「图片」页点击「添加图片」，可一次选择多张，每张不超过 10 MB。图片会保存在项目的 `public/images/gallery/` 文件夹，刷新页面仍然保留；相同图片重复上传不会重复添加。
 
-- Node.js 18.17+
-- npm
+也可以直接将 PNG、JPG、WebP、GIF 或 AVIF 文件放进该文件夹。上传的图片标题和时间保存在同目录的 `metadata.json`，直接放入的图片默认使用文件名作为标题。
 
-### 快速开始
+重新构建、部署博客后，图片会在公开网站展示。在线访客只能浏览；上传入口只出现在本地站点。
 
-```bash
-# 克隆项目
-git clone https://github.com/1213722170/blog.git
-cd blog
+在本地「图片」页，每张图片下方有「删除」按钮。删除后可点击提示栏中的「撤销删除」恢复最近移除的图片。原图暂存于项目根目录的 `.gallery-trash/`，不会被静态网站发布，也已排除在 Git 提交之外。删除后重新部署博客，线上图片集才会同步移除。
 
-# 安装依赖
-npm install
+## 写文章
 
-# 启动开发服务器
-npm run dev
-```
+在 posts/ 新建 Markdown 文件，文件名就是文章 slug。重构没有修改已有文章的 slug。
 
-访问 http://localhost:3000 查看效果
-
-## 📝 如何写文章
-
-### 创建新文章
-
-1. 在 `posts` 目录下创建一个新的 `.md` 文件,例如 `my-new-post.md`
-
-2. 在文件开头添加 Front Matter 元数据:
-
-```markdown
+~~~markdown
 ---
 title: "文章标题"
-date: "2025-10-23"
-description: "文章简短描述"
-tags: ["标签1", "标签2"]
+date: "2026-10-20"
+description: "文章简介"
+tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 11
 ---
 
-# 文章标题
-
-这里是文章内容...
-```
-
-### Front Matter 字段说明
-
-- `title` (必需): 文章标题
-- `date` (必需): 发布日期,格式为 YYYY-MM-DD
-- `description` (推荐): 文章简短描述,用于文章列表和 SEO
-- `tags` (可选): 文章标签数组
-
-### Markdown 语法支持
-
-博客支持所有标准 Markdown 语法以及 GitHub Flavored Markdown (GFM),包括:
-
-- 标题、段落、列表
-- 粗体、斜体、删除线
-- 链接和图片
-- 代码块和行内代码
-- 引用
-- 表格
-- 任务列表
-
-#### 代码高亮示例
-
-````markdown
-```javascript
-function hello() {
-  console.log("Hello, World!");
-}
-```
-````
-
-## 📁 项目结构
+## 第一个章节
 
-```
-my-blog/
-├── app/                    # Next.js App Router 目录
-│   ├── layout.tsx         # 根布局组件
-│   ├── page.tsx           # 首页
-│   ├── globals.css        # 全局样式
-│   ├── about/             # 关于页面
-│   ├── friends/           # 友链页面
-│   │   └── page.tsx
-│   └── posts/             # 文章详情页
-│       └── [slug]/
-│           └── page.tsx
-├── components/             # React 组件
-│   ├── Header.tsx         # 头部导航
-│   ├── Footer.tsx         # 底部组件
-│   ├── ThemeProvider.tsx  # 主题提供者
-│   ├── ThemeToggle.tsx    # 主题切换按钮
-│   └── MusicPlayer.tsx    # 音乐播放器
-├── lib/                   # 工具函数
-│   ├── posts.ts          # 文章管理功能
-│   └── utils.ts          # 通用工具函数
-├── posts/                 # Markdown 文章目录
-│   ├── welcome.md
-│   ├── nextjs-14-features.md
-│   └── markdown-guide.md
-├── public/                # 静态资源
-│   └── music/            # 音乐文件目录
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-├── next.config.js
-├── README.md             # 项目说明文档
-├── FRIENDS-GUIDE.md      # 友链页面使用指南
-└── MUSIC-PLAYER.md       # 音乐播放器使用说明
-```
+正文……
+~~~
 
-## 🎨 自定义配置
+- 日期统一写为 YYYY-MM-DD；读取时兼容旧的单数字月日，缺失或无效日期会在构建时明确报错。
+- series 和 seriesOrder 可选；加入深度学习专题时，使用 deep-learning 和唯一的学习顺序数字。
+- draft: true 会将文章排除出公开列表和静态路由。
+- 标题会自动生成唯一锚点，目录从真实渲染的章节生成。
+- 阅读时间根据文字和图片数量估算。
+- 本地图片放在 public/images/posts/。Markdown 可使用 /images/posts/图片.png 或 图片.png。
+- 图片、音乐及其他 public 资源统一使用 lib/utils.ts 的 getAssetPath；内部页面使用 Next 的 Link，避免重复添加路径前缀。
+- 不要在文章或组件中硬编码 /blog 前缀。
 
-### 修改博客标题和描述
+## 构建与部署
 
-编辑 `app/layout.tsx` 文件:
+~~~powershell
+npm.cmd test
+npm.cmd run build
+~~~
 
-```typescript
-export const metadata: Metadata = {
-  title: "你的博客名称",
-  description: "你的博客描述",
-};
-```
+静态输出位于 out/，所有页面都使用目录式 URL（trailingSlash）。本地和 Vercel 默认从根路径 / 部署。
 
-### 修改导航菜单
+### GitHub Pages
 
-编辑 `components/Header.tsx` 文件,在导航部分添加或修改链接。
+.github/workflows/deploy.yml 已配置：
 
-### 自定义样式
+~~~text
+NEXT_PUBLIC_BASE_PATH=/blog
+NEXT_PUBLIC_SITE_URL=https://1213722170.github.io/blog
+~~~
 
-- 全局样式: 编辑 `app/globals.css`
-- Tailwind 配置: 编辑 `tailwind.config.ts`
-- 主题颜色: 修改 `globals.css` 中的 CSS 变量
+构建路径由 NEXT_PUBLIC_BASE_PATH 显式决定，服务端和浏览器保持一致，不再根据 NODE_ENV 或域名猜测。
 
-### 修改代码高亮主题
+在 PowerShell 本地验证相同构建：
 
-在 `app/posts/[slug]/page.tsx` 中修改 highlight.js 主题:
+~~~powershell
+$env:NEXT_PUBLIC_BASE_PATH = "/blog"
+$env:NEXT_PUBLIC_SITE_URL = "https://1213722170.github.io/blog"
+npm.cmd run build
+~~~
 
-```typescript
-import "highlight.js/styles/github-dark.css"; // 更换为其他主题
-```
+### Vercel 或独立域名
 
-可用主题参考: [Highlight.js Styles](https://highlightjs.org/static/demo/)
+项目根目录设置为 my-blog，构建命令为 npm run build，输出目录为 out。NEXT_PUBLIC_BASE_PATH 留空；NEXT_PUBLIC_SITE_URL 设置为实际站点地址。
 
-## 🎵 音乐播放器使用
+不要复用 GitHub Pages 的 out 构建产物到根路径站点；各部署目标应带各自配置重新构建。
 
-博客内置了一个精美的音乐播放器组件,位于页面右下角。
+## 修改外观与站点信息
 
-### 添加音乐文件
+- lib/site.ts：名称、作者、描述及深度学习专题信息。
+- app/globals.css：纸面颜色、文字、排版、响应式和深浅主题。
+- components/Header.tsx：导航。
+- components/MusicPlayer.tsx：播放列表；默认收起，用户主动播放。
 
-1. 将音乐文件(MP3格式)放入 `public/music/` 目录
-2. 文件命名为 `365-li-lu.mp3` (或修改配置)
-3. 刷新页面即可使用
+原开场动画组件与资源仍保留在仓库中；新的全站布局不再自动播放开场、云朵和花瓣动画。
 
-### 播放器功能
+## 验证
 
-- ▶️ 播放/暂停控制
-- 🎚️ 进度条拖动
-- 🔊 音量调节
-- 👁️ 显示/隐藏播放器
-- 🌓 深色模式适配
-
-详细使用说明请查看 [MUSIC-PLAYER.md](./MUSIC-PLAYER.md)
-
-## 🔗 友链页面使用
-
-博客内置了精美的友情链接页面,用于展示好友的网站。
-
-### 添加友链
-
-1. 编辑 `app/friends/page.tsx` 文件
-2. 在 `friends` 数组中添加友链信息:
-
-```typescript
-{
-  name: "好友名称",
-  avatar: "/avatars/friend.jpg",  // 或使用在线图片 URL
-  link: "https://friend-website.com",
-  description: "网站描述",
-}
-```
-
-### 页面特性
-
-- 🖼️ 支持显示头像图片
-- 🔗 点击跳转到对应网站(新标签页)
-- 📝 显示网站名称和描述
-- 🎨 悬停动画效果
-- 📱 响应式卡片布局
-- 🌓 深色模式适配
-
-详细使用说明请查看 [FRIENDS-GUIDE.md](./FRIENDS-GUIDE.md)
-
-## 🛠️ 部署
-
-### 已部署到 GitHub Pages ✅
-
-项目使用 GitHub Actions 自动部署到 GitHub Pages，推送代码到 GitHub 即可自动更新：
-
-```bash
-git add .
-git commit -m "更新内容"
-git push
-```
-
-查看部署状态: https://github.com/1213722170/blog/actions
-
-### 双平台部署方案
-
-- **GitHub Pages** (主要): 国内用户访问，无需科学上网
-- **Vercel** (备用): 国外用户访问，速度更快
-
-详细部署教程请查看：
-- [GitHub Pages 部署指南](./GITHUB-PAGES-DEPLOY.md)
-- [通用部署指南](./DEPLOYMENT.md)
-
-## 🔧 常见问题
-
-### 文章不显示?
-- 确保文件以 `.md` 结尾并放在 `posts/` 目录
-- 检查 Front Matter 格式是否正确
-
-### 构建失败?
-```bash
-rm -rf node_modules .next
-npm install
-npm run build
-```
-
-### 网站访问慢?
-国内访问 Vercel 可能较慢,可配置 CDN 或使用代理
-
-更多问题查看项目 Issues 或联系作者
-
-
-
-## 📚 相关文档
-
-- 📖 [部署指南](./DEPLOYMENT.md) - 详细的多平台部署教程
-- 📖 [GitHub Pages 部署](./GITHUB-PAGES-DEPLOY.md) - GitHub Pages 详细指南
-- 📖 [GitHub 上传指南](./GITHUB-UPLOAD-GUIDE.md) - Git 使用完整教程
-- 📖 [音乐播放器说明](./MUSIC-PLAYER.md) - 音乐播放器功能介绍
-- 📖 [友链页面指南](./FRIENDS-GUIDE.md) - 友情链接使用教程
-
-## 📄 许可证
-
-MIT License - 你可以自由使用、修改和分发这个项目。
-
-
-
-## 📧 联系方式
-
-如有问题或建议,欢迎联系:
-
-- GitHub: [@1213722170](https://github.com/1213722170)
-- 项目仓库: https://github.com/1213722170/blog
-- Email: 1213722171@qq.com
-
-## 🙏 致谢
-
-感谢以下开源项目:
-
-- [Next.js](https://nextjs.org/) - React 框架
-- [Tailwind CSS](https://tailwindcss.com/) - CSS 框架
-- [Highlight.js](https://highlightjs.org/) - 代码高亮
-- [React Markdown](https://github.com/remarkjs/react-markdown) - Markdown 渲染
-- [Vercel](https://vercel.com/) - 部署平台
-
-
-
----
-
-**享受写作的乐趣!** ✍️
-
-*Built with ❤️ using Next.js 14*
+npm test 检查日期有效性、真实时间排序、专题顺序、旧 slug 及根路径 / 子路径配置。npm run build 执行 Next 的生产编译、类型检查、lint 和静态导出。

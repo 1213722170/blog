@@ -1,8 +1,10 @@
 ---
 title: "刘澈的deeplearning笔记8"
-date: "2026-2-6"
+date: "2026-02-06"
 description: "如何分辨宝可梦和数码宝贝"
 tags: ["深度学习", "笔记"]
+series: deep-learning
+seriesOrder: 9
 ---
 如何分辨出宝可梦和数码宝贝？
 

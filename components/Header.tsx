@@ -1,46 +1,33 @@
 "use client";
-
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
-
+import { site } from "@/lib/site";
+const links = [
+  { href: "/", label: "首页" },
+  { href: "/gallery", label: "图片" },
+  { href: "/archives", label: "归档" },
+  { href: "/about", label: "关于" },
+  { href: "/friends", label: "友链" },
+];
 export function Header() {
-  return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-slate-900/70 border-b border-white/20 dark:border-slate-700/50 shadow-sm">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between max-w-4xl">
-        <Link 
-          href="/" 
-          className="text-xl font-bold bg-gradient-to-r from-sky-600 to-cyan-600 dark:from-sky-400 dark:to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-200"
-        >
-          我的博客
-        </Link>
-        <div className="flex items-center gap-6">
-          <Link 
-            href="/" 
-            className="relative group px-3 py-2 rounded-lg hover:bg-sky-50 dark:hover:bg-slate-800 transition-all duration-200"
-          >
-            <span className="relative z-10 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-              首页
-            </span>
-          </Link>
-          <Link 
-            href="/about" 
-            className="relative group px-3 py-2 rounded-lg hover:bg-sky-50 dark:hover:bg-slate-800 transition-all duration-200"
-          >
-            <span className="relative z-10 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-              关于
-            </span>
-          </Link>
-          <Link 
-            href="/friends" 
-            className="relative group px-3 py-2 rounded-lg hover:bg-sky-50 dark:hover:bg-slate-800 transition-all duration-200"
-          >
-            <span className="relative z-10 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-              友链
-            </span>
-          </Link>
-          <ThemeToggle />
-        </div>
-      </nav>
-    </header>
-  );
+  const pathname = usePathname().replace(/\/+$/, "") || "/";
+  const [isLocal, setIsLocal] = useState(false);
+  useEffect(() => {
+    setIsLocal(["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname));
+  }, []);
+  return <header className="site-header"><div className="header-inner">
+    <Link href="/" className="site-brand" aria-label={site.name + "，返回首页"}><span className="brand-mark" aria-hidden="true">澈</span><span>{site.name}<span className="brand-note">学习 / 思考 / 记录</span></span></Link>
+    <div className="header-actions">
+      <nav className="site-nav" aria-label="主导航">{links.map(({ href, label }) => <Link key={href} href={href} aria-current={pathname === href ? "page" : undefined}>{label}</Link>)}</nav>
+      <div className="header-tools">
+        {isLocal && <Link href="/write" className="header-write-link" aria-current={pathname === "/write" ? "page" : undefined}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m16 3 5 5-12 12-6 1 1-6L16 3Z" /><path d="m13 6 5 5" /></svg>
+          编辑文章
+        </Link>}
+        <ThemeToggle />
+      </div>
+    </div>
+  </div></header>;
 }
