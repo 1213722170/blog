@@ -1,0 +1,5 @@
+
+> my-blog@0.1.0 write-server
+> node scripts/write-server.mjs
+
+Blog write server running at http://localhost:4317
